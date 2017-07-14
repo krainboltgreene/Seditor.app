@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "env"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@internal/colors": "./source/@internal/colors",
+          "@internal/styles": "./source/@internal/styles",
+          "@internal/elements": "./source/@internal/elements",
+          "@internal/pages": "./source/@internal/pages",
+          "@internal/view": "./source/@internal/view",
+          "@internal/intents": "./source/@internal/intents",
+          "@internal/logger": "./source/@internal/logger",
+          "@internal/ui": "./source/@internal/ui"
+        }
+      }
+    ],
+    "transform-object-rest-spread",
+    "pipe-operator-curry",
+    "transform-runtime",
+    "external-helpers"
+  ]
+}
