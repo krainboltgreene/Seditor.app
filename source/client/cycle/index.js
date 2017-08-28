@@ -1,5 +1,7 @@
 import xstream from "xstream"
-import {always} from "ramda"
+import always from "@unction/always"
+import domEventsMany from "@unction/domeventsmany"
+import mergeAllRight from "@unction/mergeallright"
 
 import view from "@internal/view"
 import * as intents from "@internal/intents"
@@ -9,29 +11,18 @@ import initialState from "./initialState"
 import parseAction from "./parseAction"
 import ipc from "./ipc"
 
+const beatSignal = {
+  event: null,
+  signal: {name: "beat"},
+}
+
 export default function cycle (sources) {
   const {DOM} = sources
-  const state$ = xstream
-    .merge(
-      xstream
-        .periodic(20000)
-        .map(
-          always({
-            event: null,
-            signal: {name: "beat"},
-          })
-        ),
-      xstream
-        .merge(
-          ipc("pushFileMatches"),
-          xstream
-            .merge(
-              DOM.events("input"),
-              DOM.events("click"),
-            )
-            .map(parseAction)
-        )
-    )
+  const state$ = mergeAllRight([
+    xstream.periodic(20000).map(always(beatSignal)),
+    ipc("pushFileMatches"),
+    domEventsMany({})("*")(DOM).map(parseAction),
+  ])
     .filter(({event, type}) => typeof type === "undefined" || event.type === type)
     .fold(
       (state, {event, name, payload}) => {
@@ -40,16 +31,6 @@ export default function cycle (sources) {
         if (!reaction) {
           return state
         }
-
-        log.info(
-          {
-            event,
-            payload,
-            before: state,
-            after: reaction(state)(event)(payload),
-          },
-          name
-        )
 
         return reaction(state)(event)(payload)
       },

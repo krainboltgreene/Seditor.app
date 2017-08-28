@@ -14,7 +14,9 @@
     "url": "https://github.com/krainboltgreene/seditor/issues"
   },
   "scripts": {
-    "start": "node './transpiled/server/index.js'",
+    "prepare": "npm run build",
+    "prestart": "npm run build",
+    "start": "electron './tmp/server/index.js'",
     "build:server": "gulp build:server",
     "build:client": "gulp build:client",
     "build": "gulp build:all",
@@ -28,27 +30,30 @@
   "devDependencies": {
     "babel-eslint": "7.2.3",
     "chokidar-cli": "1.2.0",
-    "electron": "1.6.11",
-    "electron-builder": "19.8.0",
-    "electron-rebuild": "1.5.11",
+    "electron": "1.7.5",
+    "electron-builder": "19.24.1",
+    "electron-rebuild": "1.6.0",
     "eslint": "3.19.0",
-    "eslint-find-new-rules": "2.0.2",
     "eslint-plugin-promise": "3.5.0"
   },
   "dependencies": {
     "@cycle/dom": "17.4.0",
     "@cycle/run": "3.1.0",
-    "@unction/allp": "1.0.2",
-    "@unction/catchp": "1.0.2",
-    "@unction/ispopulated": "2.0.2",
+    "@unction/allp": "2.0.0",
+    "@unction/always": "2.0.0",
+    "@unction/catchp": "2.0.0",
+    "@unction/domevents": "2.0.0",
+    "@unction/domeventsmany": "2.0.0",
+    "@unction/ispopulated": "4.0.0",
     "@unction/mapwithvaluekey": "1.0.3",
-    "@unction/mergedeepright": "1.1.1",
-    "@unction/mergeleft": "1.0.1",
-    "@unction/nestedobjof": "1.1.1",
-    "@unction/optimisticp": "1.0.3",
-    "@unction/resolvep": "1.0.2",
-    "@unction/splat": "1.0.0",
-    "@unction/thenp": "1.0.2",
+    "@unction/mergeallright": "2.0.0",
+    "@unction/mergedeepright": "2.0.0",
+    "@unction/mergeleft": "2.1.0",
+    "@unction/optimisticp": "3.0.0",
+    "@unction/recordfrom": "2.0.0",
+    "@unction/resolvep": "2.0.0",
+    "@unction/splat": "2.0.0",
+    "@unction/thenp": "2.0.0",
     "abstraction": "10.3.0",
     "babel-cli": "6.24.1",
     "babel-plugin-external-helpers": "6.22.0",
@@ -92,6 +97,5 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
     "xstream": "10.8.0"
-  },
-  "false": {}
+  }
 }
