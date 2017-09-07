@@ -2,33 +2,41 @@ import {section} from "snabbdom-helpers"
 import {label} from "snabbdom-helpers"
 import {input} from "snabbdom-helpers"
 import {button} from "snabbdom-helpers"
-
+// <div class="input-field col s6">
+//   <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+//   <label for="first_name">First Name</label>
+// </div>
 export default function filePattern () {
   return section({
     style: {
-      "height": "10%",
       "display": "flex",
-      "flex-direction": "row",
-      "align-items": "center",
-      "justify-content": "center",
+      "flex-direction": "column",
     },
     inner: [
-      label({
-        "inner": "Path Pattern",
-        "for": "pathPattern",
-      }),
-      input({
-        style: {width: "75%"},
-        attrs: {name: "pathPattern"},
-        data: {
-          signal: {
-            type: "input",
-            name: "pushFileSearch",
-            payload: "searchAndReplace",
-          },
-        },
+      section({
+        inner: [
+          label({
+            "inner": "Path",
+            "for": "pathPattern",
+          }),
+          input({
+            attrs: {name: "pathPattern"},
+            data: {
+              signal: {
+                type: "input",
+                name: "pushFileSearch",
+                payload: "searchAndReplace",
+              },
+            },
+          }),
+        ],
       }),
       button({
+        selector: ".btn.waves-effect.waves-light",
+        style: {
+          "line-height": "initial",
+          "align-self": "center",
+        },
         data: {
           signal: {
             type: "click",

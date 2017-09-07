@@ -1,15 +1,16 @@
-import {button} from "snabbdom-helpers"
+import {a} from "snabbdom-helpers"
 
-export default function anchor (to) {
-  return function anchorTo (inner) {
-    return button({
-      data: {
-        signal: {
-          name: "updateLocation",
-          payload: to,
-        },
+const styles = {navigation: {}}
+
+export default function anchor ({text, to, kind}) {
+  return a({
+    style: styles[kind],
+    data: {
+      signal: {
+        name: "updateLocation",
+        payload: to,
       },
-      inner,
-    })
-  }
+    },
+    inner: text,
+  })
 }
