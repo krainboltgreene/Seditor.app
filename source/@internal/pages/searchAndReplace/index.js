@@ -4,7 +4,7 @@ import pathPattern from "./pathPattern"
 import contentPatterns from "./contentPatterns"
 import resultList from "./resultList"
 
-export default function searchAndReplace (state) {
+export default function searchAndReplace () {
   return section({
     style: {
       "width": "100%",
@@ -16,7 +16,7 @@ export default function searchAndReplace (state) {
     inner: [
       pathPattern(),
       contentPatterns(),
-      resultList(state),
+      resultList(),
     ],
   })
 }

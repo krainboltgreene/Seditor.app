@@ -1,10 +1,12 @@
 import xstream from "xstream"
 import always from "@unction/always"
 import domEventsMany from "@unction/domeventsmany"
-import view from "@internal/view"
+import flip from "@unction/flip"
+import {application} from "@internal/ui"
 import {log} from "@internal/logger"
 import stateStream from "./stateStream"
 import eventAsAction from "./eventAsAction"
+import withState from "./withState"
 import ipc from "./ipc"
 
 const beatSignal = {
@@ -22,6 +24,7 @@ const eventStream = domEventsMany(
     "change",
   ]
 )
+const applicationWithState = flip(withState)(application())
 
 export default function cycle (sources) {
   const {DOM} = sources
@@ -32,6 +35,6 @@ export default function cycle (sources) {
       ipc("pushFileMatches"),
       eventStream(DOM).map(eventAsAction),
     ])
-      .map(view),
+      .map(applicationWithState),
   }
 }

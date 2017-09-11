@@ -7,11 +7,6 @@ import {anchor} from "@internal/elements"
 
 export default function navigation () {
   return nav({
-    // style: {
-    //   "width": "100%",
-    //   "display": "flex",
-    //   "flex-direction": "row",
-    // },
     inner: section({
       selector: ".nav-wrapper",
       inner: [

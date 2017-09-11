@@ -11,6 +11,7 @@ const envify = require("envify")
 const vinylSourceStream = require("vinyl-source-stream")
 const vinylBuffer = require("vinyl-buffer")
 const gulpChanged = require("gulp-changed")
+const gulpRename = require("gulp-rename")
 const {production} = require("gulp-environments")
 
 const DESINATION = "./tmp/"
@@ -86,6 +87,20 @@ gulp.task("build:styles", () => {
     .pipe(gulp.dest(destination))
 })
 
+gulp.task("build:metadata", () => {
+  const destination = join(DESINATION)
+
+  return gulp.src("./package-application.json")
+    .pipe(gulpChanged(destination))
+    .pipe(production(gulp.dest(destination)))
+    .pipe(gulpRename("package.json"))
+    .pipe(gulpSize({
+      title: "metadata",
+      showFiles: true,
+    }))
+    .pipe(gulp.dest(destination))
+})
+
 gulp.task("build:images", () => {
   const destination = join(DESINATION, "client")
 
@@ -122,9 +137,10 @@ gulp.task("build:assets", () => {
     .pipe(gulp.dest(destination))
 })
 
-gulp.task("build:all", ["build:server", "build:client"])
-gulp.task("watch:all", ["build:server", "build:client"], () => {
+gulp.task("build:all", ["build:server", "build:client", "build:metadata"])
+gulp.task("watch:all", ["build:server", "build:client", "build:metadata"], () => {
   gulp.watch("./source/server/**/*", ["build:server"])
   gulp.watch("./source/client/**/*", ["build:client"])
   gulp.watch("./source/@internal/**/*", ["build:server", "build:client"])
+  gulp.watch("./package-application.json", ["build:metadata"])
 })
