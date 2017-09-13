@@ -16,3 +16,4 @@ package/
 
 # Secure files
 .env
+electron-builder.env

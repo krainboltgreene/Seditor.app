@@ -20,7 +20,12 @@
       "buildResources": "./tmp/",
       "output": "./package",
       "app": "./tmp/"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github"
+      }
+    ]
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
