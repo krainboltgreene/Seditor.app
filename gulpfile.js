@@ -87,6 +87,20 @@ gulp.task("build:styles", () => {
     .pipe(gulp.dest(destination))
 })
 
+gulp.task("build:environment", () => {
+  const destination = join(DESINATION)
+
+  return gulp.src("./application.env")
+    .pipe(gulpChanged(destination))
+    .pipe(production(gulp.dest(destination)))
+    .pipe(gulpRename(".env"))
+    .pipe(gulpSize({
+      title: "environment",
+      showFiles: true,
+    }))
+    .pipe(gulp.dest(destination))
+})
+
 gulp.task("build:metadata", () => {
   const destination = join(DESINATION)
 
@@ -137,10 +151,11 @@ gulp.task("build:assets", () => {
     .pipe(gulp.dest(destination))
 })
 
-gulp.task("build:all", ["build:server", "build:client", "build:metadata"])
-gulp.task("watch:all", ["build:server", "build:client", "build:metadata"], () => {
+gulp.task("build:all", ["build:server", "build:client", "build:metadata", "build:environment"])
+gulp.task("watch:all", ["build:server", "build:client", "build:metadata", "build:environment"], () => {
   gulp.watch("./source/server/**/*", ["build:server"])
   gulp.watch("./source/client/**/*", ["build:client"])
   gulp.watch("./source/@internal/**/*", ["build:server", "build:client"])
   gulp.watch("./package-application.json", ["build:metadata"])
+  gulp.watch("./application.env", ["build:environment"])
 })

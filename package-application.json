@@ -13,11 +13,7 @@
   "bugs": {
     "url": "https://github.com/krainboltgreene/seditor/issues"
   },
-  "build": {
-    "appId": "seditor",
-    "productName": "seditor"
-  },
-  "main": "server/index.js",
+  "main": "./server/index.js",
   "scripts": {
     "start": "electron './tmp/server/index.js'"
   },
@@ -41,6 +37,7 @@
     "@unction/resolvep": "2.3.0",
     "@unction/splat": "2.3.0",
     "@unction/thenp": "2.3.0",
+    "dotenv": "4.0.0",
     "bunyan": "1.8.12",
     "electron-context-menu": "0.9.1",
     "escape-html": "1.0.3",

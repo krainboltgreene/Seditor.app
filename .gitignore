@@ -9,6 +9,7 @@ node_modules/
 
 # Temporary files
 tmp/
+package/
 
 # Log files
 /*.log

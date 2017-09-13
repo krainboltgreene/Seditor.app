@@ -4,9 +4,12 @@ import {BrowserWindow} from "electron"
 import {format} from "url"
 import {join} from "path"
 import requireEnvironmentVariables from "require-environment-variables"
+import {config} from "dotenv"
 import {log} from "@internal/logger"
 
 import receptors from "./receptors"
+
+console.log(config({path: join(__dirname, "..", ".env")}))
 
 requireEnvironmentVariables([
   "NODE_ENV",
@@ -30,7 +33,9 @@ application.on("ready", function ready () {
     slashes: true,
   }))
 
-  process.window.webContents.openDevTools()
+  if (process.env.NODE_ENV === "devepment") {
+    process.window.webContents.openDevTools()
+  }
 
   receptors()
 

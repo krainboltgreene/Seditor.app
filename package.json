@@ -13,10 +13,21 @@
   "bugs": {
     "url": "https://github.com/krainboltgreene/seditor/issues"
   },
-  "main": "server/index.js",
+  "build": {
+    "appId": "seditor",
+    "productName": "seditor",
+    "directories": {
+      "buildResources": "./tmp/",
+      "output": "./package",
+      "app": "./tmp/"
+    }
+  },
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "prestart": "npm run build",
     "start": "electron './tmp/server/index.js'",
+    "build:package": "electron-builder",
+    "build:local": "electron-builder --dir",
     "build:server": "gulp build:server",
     "build:client": "gulp build:client",
     "build": "gulp build:all",
@@ -25,9 +36,7 @@
     "watch:build": "gulp watch:all",
     "watch": "npm-run-all --parallel watch:build watch:lint watch:test",
     "test": "tap './source/**/test.js'",
-    "lint": "eslint './source/' --ignore-pattern 'node_modules'",
-    "package": "electron-builder --dir",
-    "compile": "electron-builder"
+    "lint": "eslint './source/' --ignore-pattern 'node_modules'"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -88,6 +97,7 @@
     "@unction/thenp": "2.3.0",
     "@unction/zip": "3.3.0",
     "bunyan": "1.8.12",
+    "dotenv": "4.0.0",
     "electron-context-menu": "0.9.1",
     "escape-html": "1.0.3",
     "fs-extra": "3.0.1",
