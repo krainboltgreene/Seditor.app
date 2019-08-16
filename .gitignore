@@ -5,15 +5,16 @@
 #   git config --global core.excludesfile ~/.gitignore
 
 # Regenerable files
-node_modules/
+/node_modules/
+/transpiled/
 
 # Temporary files
-tmp/
-package/
+/tmp/
+/coverage/
+/.nyc_output/
 
 # Log files
 /*.log
 
 # Secure files
-.env
-electron-builder.env
+/.env
